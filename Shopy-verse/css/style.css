@@ -20,6 +20,7 @@ header {
 }
 
 .logo a {
+    font-family: "Bungee Tint", sans-serif;
     color: white;
     font-size: 24px;
     text-decoration: none;
@@ -93,13 +94,11 @@ nav ul li.dropdown .dropdown-content a:hover {
     margin-right: 8px;
 }
 
-/* Hero Section */
+/* Hero Section Styles */
 .hero-section {
     position: relative;
-    height: 500px; /* Adjust the height as needed */
-    background-image: url(../images/bgimg.jpg); /* Replace with your background image */
-    background-size: cover; 
-    background-position: center;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,38 +106,74 @@ nav ul li.dropdown .dropdown-content a:hover {
     text-align: center;
 }
 
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.5);
+}
+
 .hero-content {
-    max-width: 600px; /* Limit the width of the content */
-    padding: 20px;
+    z-index: 1;
+    padding: 0 20px;
 }
 
-.hero-content h1 {
-    font-size: 48px; /* Larger font size for the headline */
+.hero-title {
+    font-family: "Bungee Tint", sans-serif;
+    font-size: 4rem;
     margin-bottom: 20px;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow for better readability */
+    font-weight: bold;
+    overflow: hidden; /* Hide text overflow for animation effect */
+    white-space: nowrap;
+    border-right: 2px solid #fff; /* Cursor effect */
+    padding-right: 5px;
+    animation: typing 4s steps(12, end), blink-caret 0.75s step-end infinite;
 }
 
-.hero-content p {
-    font-size: 18px;
+.hero-subtitle {
+    font-size: 1.5rem;
     margin-bottom: 30px;
-    line-height: 1.5;
+    font-weight: 300;
+    opacity: 0.8;
 }
 
-.btn-primary {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 18px;
+.cta-button {
+    background-color: #2980b9;
     color: #fff;
-    background-color: #3498db; /* Primary button color */
-    border-radius: 5px;
+    padding: 15px 30px;
+    border-radius: 50px;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, transform 0.3s;
+    display: inline-block;
 }
 
-.btn-primary:hover {
-    background-color: #2980b9; /* Darker shade on hover */
+.cta-button:hover {
+    background-color: #c0392b;
     transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #fff;
+    }
 }
 
 /* Featured Products Section */

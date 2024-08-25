@@ -1,3 +1,17 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const titleElement = document.getElementById('hero-title');
+    const titleText = "Shopy-Verse";
+    
+    let index = 0;
+    let interval = setInterval(() => {
+        if (index < titleText.length) {
+            titleElement.textContent += titleText.charAt(index);
+            index++;
+        } else {
+            clearInterval(interval);
+        }
+    }, 300); // Adjust typing speed here
+});
 
 
 

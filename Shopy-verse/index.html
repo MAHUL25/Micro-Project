@@ -6,7 +6,9 @@
     <title>Home</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
 </head>
 <body>
    
@@ -36,15 +38,18 @@
 </header>
 
 
-    <!-- Hero Section -->
-<section class="hero-section">
+ <!-- Hero Section -->
+ <section class="hero-section">
+    <video autoplay muted loop class="hero-video">
+        <source src="images/hero-vid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
     <div class="hero-content">
-        <h1>Discover the Latest Trends</h1>
-        <p>Your one-stop shop for fashion that makes a statement.</p>
-        <a href="shop.html" class="btn-primary">Shop Now</a>
+        <div id="hero-title" class="hero-title"></div>
+        <p class="hero-subtitle"></p>
+        <a href="shop.html" class="cta-button">Shop Now</a>
     </div>
 </section>
-
 
     <!-- Featured Products Section -->
 <section class="featured-products">
