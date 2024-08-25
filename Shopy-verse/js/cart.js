@@ -1,28 +1,5 @@
 const products = [
-    {
-        id: 0,
-        image: 'images/gg-1.jpg',
-        title: 'Z Flip Foldable Mobile',
-        price: 120,
-    },
-    {
-        id: 1,
-        image: 'images/hh-2.jpg',
-        title: 'Air Pods Pro',
-        price: 60,
-    },
-    {
-        id: 2,
-        image: 'images/ee-3.jpg',
-        title: '250D DSLR Camera',
-        price: 230,
-    },
-    {
-        id: 3,
-        image: 'images/aa-1.jpg',
-        title: 'Head Phones',
-        price: 100,
-    }
+
 ];
 
 let cart = [];

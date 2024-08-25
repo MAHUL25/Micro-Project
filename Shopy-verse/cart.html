@@ -8,30 +8,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="logo"><a href="index.html" class="logo-link">Shopy-verse</a></div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Categories</a>
-                    <div class="dropdown-content">
-                        <a href="shop.html?category=men">Men's Fashion</a>
-                        <a href="shop.html?category=women">Women's Fashion</a>
-                        <a href="shop.html?category=kids">Kids' Fashion</a>
-                    </div>
-                </li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html">Cart</a></li>
-            </ul>
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search for products...">
-                <button id="search-button">Search</button>
-            </div>
-        </nav>
-    </header>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+        <a href="index.html" class="logo-link">Shopy-verse</a>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="shop.html"><i class="fas fa-store"></i> Shop</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn"><i class="fas fa-tags"></i> Categories</a>
+                <div class="dropdown-content">
+                    <a href="shop.html?category=men"><i class="fas fa-male"></i> Men's Fashion</a>
+                    <a href="shop.html?category=women"><i class="fas fa-female"></i> Women's Fashion</a>
+                    <a href="shop.html?category=kids"><i class="fas fa-child"></i> Kids' Fashion</a>
+                </div>
+            </li>
+        
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            <li id="user-auth-link"><a href="login.html"><i class="fas fa-user"></i>Login</a></li>
+        </ul>
+    </nav>
+</header>
+
 
     <!-- Cart Page -->
     <section class="cart-section">
@@ -54,7 +55,7 @@
                     <h3>Total:</h3>
                     <p class="total">$0.00</p>
                 </div>
-                <button id="checkout-button" class="checkout-btn">Proceed to Checkout</button>
+                <button id="checkout-button" class="checkout-btn"><a href="checkout.html" style="color: white;text-decoration: none;">Proceed to Checkout</a></button>
             </div>
         </div>
     </section>

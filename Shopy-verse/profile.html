@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+        <a href="index.html" class="logo-link">Shopy-verse</a>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="shop.html"><i class="fas fa-store"></i> Shop</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn"><i class="fas fa-tags"></i> Categories</a>
+                <div class="dropdown-content">
+                    <a href="shop.html?category=men"><i class="fas fa-male"></i> Men's Fashion</a>
+                    <a href="shop.html?category=women"><i class="fas fa-female"></i> Women's Fashion</a>
+                    <a href="shop.html?category=kids"><i class="fas fa-child"></i> Kids' Fashion</a>
+                </div>
+            </li>
+        
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            <li id="user-auth-link"><a href="login.html"><i class="fas fa-user"></i>Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+
+    <!-- Profile Page -->
+    <section class="profile-section">
+        <div class="profile-container">
+            <h2>Welcome, [User's Name]</h2>
+            <div class="profile-content">
+                <div class="profile-sidebar">
+                    <ul>
+                        <li><a href="#personal-info">Personal Information</a></li>
+                        <li><a href="#order-history">Order History</a></li>
+                        <li><a href="#settings">Settings</a></li>
+                    </ul>
+                </div>
+                <div class="profile-details">
+                    <div id="personal-info" class="profile-tab">
+                        <h3>Personal Information</h3>
+                        <p>Name: [User's Name]</p>
+                        <p>Email: [User's Email]</p>
+                        <p>Address: [User's Address]</p>
+                        <button>Edit Information</button>
+                    </div>
+                    <div id="order-history" class="profile-tab">
+                        <h3>Order History</h3>
+                        <div class="order-item">
+                            <p>Order #12345 - Stylish Dress - $49.99</p>
+                            <p>Status: Delivered</p>
+                        </div>
+                        <!-- Add more orders as needed -->
+                    </div>
+                    <div id="settings" class="profile-tab">
+                        <h3>Settings</h3>
+                        <div class="button-container"></div>    
+                        <button id="logoutButton" class="logout-btn">Logout</button>
+                   
+
+<div class="change-password-section">
+    <button id="showChangePasswordForm" class="btn">Change Password</button>
+    
+    <!-- The form is hidden by default -->
+    <div id="changePasswordFormContainer" class="form-container">
+        <form id="changePasswordForm">
+            <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input type="password" id="currentPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" id="newPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmNewPassword">Confirm New Password</label>
+                <input type="password" id="confirmNewPassword" required>
+            </div>
+            <button type="submit" class="btn submit-btn">Change Password</button>
+        </form>
+    </div>
+</div>
+</div>
+                        
+                       
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h4>Contact Information</h4>
+            <p>Email: info@Shopy-verse.com</p>
+            <p>Phone: +1 234 567 890</p>
+            <p>Address: 123  Street, Style City, SC 12345</p>
+
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Shopy-verse. All rights reserved. <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>

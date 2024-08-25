@@ -3,101 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Checkout - FashionHub</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 <body>
-    <header>
-        <div class="logo"> <div class="logo"><a href="index.html" class="logo-link">Shopy-verse</a></div></div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Categories</a>
-                    <div class="dropdown-content">
-                        <a href="shop.html?category=men">Men's Fashion</a>
-                        <a href="shop.html?category=women">Women's Fashion</a>
-                        <a href="shop.html?category=kids">Kids' Fashion</a>
-                    </div>
-                </li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html">Cart</a></li>
-            </ul>
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search for products...">
-                <button id="search-button">Search</button>
-            </div>
-        </nav>
-    </header>
-    
-    <section class="checkout">
+     <!-- Header Section -->
+<header>
+    <div class="logo">
+        <a href="index.html" class="logo-link">Shopy-verse</a>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="shop.html"><i class="fas fa-store"></i> Shop</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn"><i class="fas fa-tags"></i> Categories</a>
+                <div class="dropdown-content">
+                    <a href="shop.html?category=men"><i class="fas fa-male"></i> Men's Fashion</a>
+                    <a href="shop.html?category=women"><i class="fas fa-female"></i> Women's Fashion</a>
+                    <a href="shop.html?category=kids"><i class="fas fa-child"></i> Kids' Fashion</a>
+                </div>
+            </li>
+        
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            <li id="user-auth-link"><a href="login.html"><i class="fas fa-user"></i>Login</a></li>
+        </ul>
+    </nav>
+</header>
+    <!-- Checkout Page -->
+    <section class="checkout-section">
         <h2>Checkout</h2>
-        <form action="#">
-            <div class="billing-details">
-                <h3>Billing Details</h3>
-                <label for="name">Full Name</label>
-                <input type="text" id="name" required>
+        <div class="checkout-container">
+            <form class="checkout-form" id="checkout-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Shipping Address</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state" required>
+                </div>
+                <div class="form-group">
+                    <label for="zip-code">Zip Code</label>
+                    <input type="text" id="zip-code" name="zip-code" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option value="us">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="canada">Canada</option>
+                        <!-- Add more countries as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Place Order">
+                </div>
+            </form>
 
-                <label for="email">Email Address</label>
-                <input type="email" id="email" required>
-
-                <label for="address">Shipping Address</label>
-                <input type="text" id="address" required>
-
-                <label for="city">City</label>
-                <input type="text" id="city" required>
-
-                <label for="zipcode">Zip Code</label>
-                <input type="text" id="zipcode" required>
-
-                <label for="country">Country</label>
-                <input type="text" id="country" required>
+            <!-- Checkout Summary -->
+            <div class="checkout-summary">
+                <div class="summary-item">
+                    <h3>Subtotal:</h3>
+                    <p class="total">$120.00</p>
+                </div>
+                <div class="summary-item">
+                    <h3>Tax:</h3>
+                    <p class="total">$12.00</p>
+                </div>
+                <div class="summary-item">
+                    <h3>Total:</h3>
+                    <p class="total">$132.00</p>
+                </div>
+                <button id="checkout-button" class="checkout-btn">Confirm Order</button>
             </div>
-            <div class="payment-method">
-                <h3>Payment Method</h3>
-                <label for="card-name">Name on Card</label>
-                <input type="text" id="card-name" required>
-
-                <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" required>
-
-                <label for="expiry-date">Expiry Date</label>
-                <input type="text" id="expiry-date" required>
-
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" required>
-            </div>
-            <button type="submit" class="btn">Place Order</button>
-        </form>
+        </div>
     </section>
 
-     <!-- Footer -->
-<footer class="footer">
-    <div class="footer-content">
-        <h4>Contact Information</h4>
-        <p>Email: info@Shopy-verse.com</p>
-        <p>Phone: +1 234 567 890</p>
-        <p>Address: 123  Street, Style City, SC 12345</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h4>Contact Information</h4>
+            <p>Email: info@Shopy-verse.com</p>
+            <p>Phone: +1 234 567 890</p>
+            <p>Address: 123 Street, Style City, SC 12345</p>
 
-        <div class="social-links">
-            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2024 Shopy-verse. All rights reserved. <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
-    </div>
-</footer>
-    <script src="script.js"></script>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Shopy-verse. All rights reserved. <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+        </div>
+    </footer>
 </body>
 </html>
