@@ -7,42 +7,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop</title>
-    <link rel="stylesheet" href="{% static 'shops/style.css' %}">
+    <link rel="stylesheet" href="{% static 'shops/css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="logo"> <div class="logo"><a href="{% url 'shops:index' %}" class="logo-link">Shopy-verse</a></div></div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="{% url 'shops:index' %}">Home</a></li>
-                <li><a href="{% url 'shops:shop' %}">Shop</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Categories</a>
-                    <div class="dropdown-content">
-                        <a href="shop.html?category=men">Men's Fashion</a>
-                        <a href="shop.html?category=women">Women's Fashion</a>
-                        <a href="shop.html?category=kids">Kids' Fashion</a>
-                    </div>
-                </li>
-                <li><a href="{% url 'shops:shop' %}">Contact</a></li>
-                <li><a href="{% url 'shops:cart' %}">Cart</a></li>
-            </ul>
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search for products...">
-                <button id="search-button">Search</button>
-            </div>
-        </nav>
-    </header>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+        <a href="{% url 'shops:index' %}" class="logo-link">Shopy-verse</a>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'shops:index' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'shops:shop' %}"><i class="fas fa-store"></i> Shop</a></li>        
+            <li><a href="{% url 'shops:contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="{% url 'shops:cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            <li id="user-auth-link"><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i>Login</a></li>
+        </ul>
+    </nav>
+</header>
+
     <!-- Shop Section -->
     <main>
         <section class="shop-container">
            <!-- Product Card Example -->
-            {% for i in 10|range %}
-            <div class="product-card1">
-                    <img src="{% static 'images/product1.jpg' %}" alt="Stylish Dress" class="product-image1">
+            {% for i in 9|range %}
+                <div class="product-card1">
+                    <img src="{% static 'shops/images/product1.jpg' %}" alt="Stylish Dress" class="product-image1">
                     <div class="product-info1">
                         <h3 class="product-title1">Stylish Dress</h3>
                         <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -51,6 +45,78 @@
                     </div>
                 </div>
             {% endfor %}
+        <!-- <div class="product-card1">
+            <img src="images/product1.jpg" alt="Stylish Dress" class="product-image1">
+            <div class="product-info1">
+                <h3 class="product-title1">Stylish Dress</h3>
+                <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="product-price1">$49.99</div>
+                <a href="product.html" class="view-product-button">View Product</a>
+            </div>
+        </div>
+        <div class="product-card1">
+            <img src="images/product1.jpg" alt="Stylish Dress" class="product-image1">
+            <div class="product-info1">
+                <h3 class="product-title1">Stylish Dress</h3>
+                <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="product-price1">$49.99</div>
+                <a href="product.html" class="view-product-button">View Product</a>
+            </div>
+        </div>
+        <div class="product-card1">
+            <img src="images/product1.jpg" alt="Stylish Dress" class="product-image1">
+            <div class="product-info1">
+                <h3 class="product-title1">Stylish Dress</h3>
+                <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="product-price1">$49.99</div>
+                <a href="product.html" class="view-product-button">View Product</a>
+            </div>
+        </div>
+        <div class="product-card1">
+            <img src="images/product1.jpg" alt="Stylish Dress" class="product-image1">
+            <div class="product-info1">
+                <h3 class="product-title1">Stylish Dress</h3>
+                <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="product-price1">$49.99</div>
+                <a href="product.html" class="view-product-button">View Product</a>
+            </div>
+        </div>
+        <div class="product-card1">
+            <img src="images/product1.jpg" alt="Stylish Dress" class="product-image1">
+            <div class="product-info1">
+                <h3 class="product-title1">Stylish Dress</h3>
+                <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="product-price1">$49.99</div>
+                <a href="product.html" class="view-product-button">View Product</a>
+            </div>
+        </div>
+        <div class="product-card1">
+            <img src="images/product1.jpg" alt="Stylish Dress" class="product-image1">
+            <div class="product-info1">
+                <h3 class="product-title1">Stylish Dress</h3>
+                <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="product-price1">$49.99</div>
+                <a href="product.html" class="view-product-button">View Product</a>
+            </div>
+        </div>
+        <div class="product-card1">
+            <img src="images/product1.jpg" alt="Stylish Dress" class="product-image1">
+            <div class="product-info1">
+                <h3 class="product-title1">Stylish Dress</h3>
+                <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="product-price1">$49.99</div>
+                <a href="product.html" class="view-product-button">View Product</a>
+            </div>
+        </div>
+        <div class="product-card1">
+            <img src="images/product1.jpg" alt="Stylish Dress" class="product-image1">
+            <div class="product-info1">
+                <h3 class="product-title1">Stylish Dress</h3>
+                <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="product-price1">$49.99</div>
+                <a href="product.html" class="view-product-button">View Product</a>
+            </div>
+        </div> -->
         </section>
     </main>
 
@@ -79,6 +145,6 @@
     </div>
 </footer>
 
-    <script src="{% static 'shops/script.js' %}"></script>
+    <script src="{% static 'shops/js/script.js' %}"></script>
 </body>
 </html>
