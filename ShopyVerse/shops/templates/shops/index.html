@@ -50,8 +50,8 @@
     <h2>Featured Products</h2>
     <div class="products-container">
        <!-- Example product card -->
-        <div class="product-card">
-            <img src="{% static 'shops/images/product1.jpg' %}" alt="Product 1">
+        <!-- <div class="product-card">
+            <img src="/media/shops/images/71ojkmsYe8L._SL1100_.jpg" alt="Product 1">
             <div class="info">
                 <h3>Stylish Dress</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -76,14 +76,14 @@
                 <div class="price">$39.99</div>
                 <a href="{% url 'shops:products' %}" class="btn">View Product</a>
             </div>
-        </div>
-        {% for i in 5|range %}
+        </div> -->
+        {% for i in product %}
             <div class="product-card">
-                <img src="{% static 'shops/images/product1.jpg' %}" alt="Product 4">
+                <img src="/media/{{i.image}}" alt="Product 4">
                 <div class="info">
-                    <h3>Sporty Shoes</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <div class="price">$59.99</div>
+                    <h3>{{i.product_name}}</h3>
+                    <!-- <p>{{i.about_product}}</p> -->
+                    <div class="price">₹{{i.discounted_price}}</div>
                     <a href="{% url 'shops:products' %}" class="btn">View Product</a>
                 </div>
             </div>
