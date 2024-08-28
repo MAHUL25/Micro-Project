@@ -2,9 +2,9 @@ from django.db import models
 
 # Create your models here.
 class ProductDetails(models.Model):
-    product_id = models.CharField(max_length=10)
-    product_name = models.CharField(max_length=100)
-    category = models.CharField(max_length=50, default="")
+    product_id = models.CharField(max_length=10, primary_key=True)
+    product_name = models.CharField(max_length=200)
+    category = models.CharField(max_length=100, default="")
     discounted_price = models.IntegerField(default=0)
     actual_price = models.IntegerField(default=0)
     rating = models.FloatField(max_length=5, default=0)
