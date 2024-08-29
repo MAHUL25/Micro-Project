@@ -23,6 +23,7 @@
             <li><a href="{% url 'shops:index' %}"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="{% url 'shops:shop' %}"><i class="fas fa-store"></i> Shop</a></li>        
             <li><a href="{% url 'shops:contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="{% url 'shops:addProduct' %}"><i class="fas fa-plus"></i> Add Product</a></li> 
             <li><a href="{% url 'shops:cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
             <li id="user-auth-link"><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i>Login</a></li>
         </ul>
@@ -55,8 +56,8 @@
                 <label for="about">About Products:</label>
                 <input type="text" id="about" name="about" required>
                 
-                <label for="image">Add an Image:</label>
-                <input type="image">
+                <label for="imageUpload">Choose an image to upload:</label>
+                <input type="file" id="imageUpload" name="image" accept="image/*" required>
                 <button type="submit" class="btn">Submit</button>
             </form>
         </section>
