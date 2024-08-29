@@ -34,14 +34,14 @@
     <main>
         <section class="shop-container">
            <!-- Product Card Example -->
-            {% for i in 9|range %}
+            {% for i in product %}
                 <div class="product-card1">
-                    <img src="{% static 'shops/images/product1.jpg' %}" alt="Stylish Dress" class="product-image1">
+                    <img src="/media/{{i.image}}" alt="Stylish Dress" class="product-image1">
                     <div class="product-info1">
-                        <h3 class="product-title1">Stylish Dress</h3>
-                        <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <div class="product-price1">$49.99</div>
-                        <a href="{% url 'shops:products' %}" class="view-product-button">View Product</a>
+                        <h3 class="product-title1">{{i.display_name}}</h3>
+                        <!-- <p class="product-description1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
+                        <div class="product-price1">₹{{i.discounted_price}}</div>
+                        <a href="{% url 'shops:products' i.product_id %}" class="view-product-button">View Product</a>
                     </div>
                 </div>
             {% endfor %}

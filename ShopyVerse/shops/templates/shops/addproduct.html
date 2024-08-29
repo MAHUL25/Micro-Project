@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="{% static 'shops/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+</head>
+<body>
+   <!-- Header Section -->
+<header>
+    <div class="logo">
+        <a href="{% url 'shops:index' %}" class="logo-link">Shopy-verse</a>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{% url 'shops:index' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'shops:shop' %}"><i class="fas fa-store"></i> Shop</a></li>        
+            <li><a href="{% url 'shops:contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="{% url 'shops:cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            <li id="user-auth-link"><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i>Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <!-- Contact Form Section -->
+    <main>
+        <section class="contact">
+            <h2>Add Your Products</h2>
+            <form action="#" method="post" class="contact-form">
+                <label for="pid">Product id:</label>
+                <input type="text" id="pid" name="pid" required>
+                
+                <label for="pname">Product Name:</label>
+                <input type="text" id="pname" name="pname" required>
+
+                <label for="Category">Category:</label>
+                <input type="text" id="Category" name="Category" required>
+
+                <label for="DiscountedPrice">Discounted Price:</label>
+                <input type="text" id="DiscountedPrice" name="DiscountedPrice" required>
+
+                <label for="ActualPrice">Actual Price:</label>
+                <input type="text" id="ActualPrice" name="ActualPrice" required>
+
+                <label for="ActualPrice">Rating:</label>
+                <input type="text" id="ActualPrice" name="ActualPrice" required>
+
+                <label for="about">About Products:</label>
+                <input type="text" id="about" name="about" required>
+                
+                <label for="image">Add an Image:</label>
+                <input type="image">
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </section>
+    </main>
+
+     <!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <h4>Contact Information</h4>
+        <p>Email: info@Shopy-verse.com</p>
+        <p>Phone: +1 234 567 890</p>
+        <p>Address: 123  Street, Style City, SC 12345</p>
+
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Shopy-verse. All rights reserved. <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+    </div>
+</footer>
+
+    <script src="{% static 'shops/js/script.js' %}"></script>
+</body>
+</html>

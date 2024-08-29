@@ -15,8 +15,8 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 products = ProductDetails.objects.all()
-n = len(products)
-print(n)
+# n = len(products)
+n = 10
 nSlides = n//4 + ceil((n/4)-(n//4))
 param = {
     'no_of_slides': nSlides,
@@ -27,14 +27,16 @@ param = {
 name='login'
 # Create your views here.
 def index(request):
-
     return render(request, "shops/index.html", param)
 
-def products(request):
-    return render(request, "shops/product.html")
+def products(request, p_id):
+    print(p_id)
+    product = ProductDetails.objects.get(pk=p_id)
+    print(product)
+    return render(request, "shops/product.html", {'product': product})
 
 def shop(request):
-    return render(request, "shops/shop.html")
+    return render(request, "shops/shop.html", param)
 
 def contacts(request):
     return render(request, "shops/contact.html")
@@ -130,6 +132,9 @@ def profile(request):
     username = "new user"
     email = "newuser@gmail.com"
     return render(request, "shops/profile.html", {'username': username, 'email': email})
+
+def addProduct(request):
+    return render(request, "shops/addproduct.html")
 
 def checkout(request):
     return render(request, "shops/checkout.html")

@@ -4,6 +4,7 @@ from django.db import models
 class ProductDetails(models.Model):
     product_id = models.CharField(max_length=10, primary_key=True)
     product_name = models.CharField(max_length=200)
+    display_name = models.CharField(max_length=100, default="")
     category = models.CharField(max_length=100, default="")
     discounted_price = models.IntegerField(default=0)
     actual_price = models.IntegerField(default=0)

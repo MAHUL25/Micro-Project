@@ -35,14 +35,14 @@
     <main>
         <section class="product-details-container">
             <div class="product-image">
-                <img src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png" alt="Essence Mascara Lash Princess">
+                <img src="/media/{{product.image}}" alt="Essence Mascara Lash Princess">
             </div>
             <div class="product-info">
-                <h1 class="product-title">Essence Mascara Lash Princess</h1>
+                <h1 class="product-title">{{product.product_name}}</h1>
                 <p class="product-description">
-                    The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.
+                    {{product.about_product}}
                 </p>
-                <div class="product-price">$9.99</div>
+                <div class="product-price">₹{{product.discounted_price}}</div>
                 <div class="product-specs">
                     <h3>Specifications</h3>
                     <ul>
