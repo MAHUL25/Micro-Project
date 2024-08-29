@@ -1,38 +1,44 @@
+{% load static %}
+{% load custom_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{% static 'shops/css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <!-- Header Section -->
-  <header>
-    <div class="logo">
-        <a href="index.html" class="logo-link">Shopy-verse</a>
-    </div>
-    <nav>
-        <ul class="nav-links">
-            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="shop.html"><i class="fas fa-store"></i> Shop</a></li>        
-            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
-            <li id="user-auth-link"><a href="login.html"><i class="fas fa-user"></i>Login</a></li>
-        </ul>
-    </nav>
-</header>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <a href="index.html" class="logo-link">Shopy-verse</a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'shops:index' %}"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="{% url 'shops:shop' %}"><i class="fas fa-store"></i> Shop</a></li>
+                <li><a href="{% url 'shops:contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="{% url 'shops:cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                <!-- <li id="user-auth-link"><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i> Login</a></li> -->
+                <li><a href="#"><i class="fas fa-user"></i> {{username}}</a></li>
+            </ul>
+        </nav>
+    </header>
 
 
 
     <!-- Profile Page -->
     <section class="profile-section">
         <div class="profile-container">
-            <h2>Welcome, [User's Name]</h2>
+            <h2>Welcome, {{ username }}</h2>
             <div class="profile-content">
                 <div class="profile-sidebar">
                     <ul>
@@ -44,9 +50,9 @@
                 <div class="profile-details">
                     <div id="personal-info" class="profile-tab">
                         <h3>Personal Information</h3>
-                        <p>Name: [User's Name]</p>
-                        <p>Email: [User's Email]</p>
-                        <p>Address: [User's Address]</p>
+                        <p>Name: {{ username }}</p>
+                        <p>Email: {{ email }}</p>
+                        <!-- <p>Address: [User's Address]</p> -->
                         <button>Edit Information</button>
                     </div>
                     <div id="order-history" class="profile-tab">
@@ -59,39 +65,39 @@
                     </div>
                     <div id="settings" class="profile-tab">
                         <h3>Settings</h3>
-                        <div class="button-container"></div>    
+                        <div class="button-container"></div>
                         <button id="logoutButton" class="logout-btn">Logout</button>
-                   
 
-<div class="change-password-section">
-    <button id="showChangePasswordForm" class="btn">Change Password</button>
-    
-    <!-- The form is hidden by default -->
-    <div id="changePasswordFormContainer" class="form-container">
-        <form id="changePasswordForm">
-            <div class="form-group">
-                <label for="currentPassword">Current Password</label>
-                <input type="password" id="currentPassword" required>
-            </div>
-            <div class="form-group">
-                <label for="newPassword">New Password</label>
-                <input type="password" id="newPassword" required>
-            </div>
-            <div class="form-group">
-                <label for="confirmNewPassword">Confirm New Password</label>
-                <input type="password" id="confirmNewPassword" required>
-            </div>
-            <button type="submit" class="btn submit-btn">Change Password</button>
-        </form>
-    </div>
-</div>
-</div>
-                        
-                       
 
+                        <!-- <div class="change-password-section">
+                            <button id="showChangePasswordForm" class="btn">Change Password</button>
+
+                            <!-- The form is hidden by default -->
+                        <div id="changePasswordFormContainer" class="form-container">
+                            <form id="changePasswordForm">
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password</label>
+                                    <input type="password" id="currentPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmNewPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmNewPassword" required>
+                                </div>
+                                <button type="submit" class="btn submit-btn">Change Password</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+
+
+
             </div>
+        </div>
+        </div>
         </div>
     </section>
 
@@ -101,7 +107,7 @@
             <h4>Contact Information</h4>
             <p>Email: info@Shopy-verse.com</p>
             <p>Phone: +1 234 567 890</p>
-            <p>Address: 123  Street, Style City, SC 12345</p>
+            <p>Address: 123 Street, Style City, SC 12345</p>
 
             <div class="social-links">
                 <a href="https://facebook.com" target="_blank" aria-label="Facebook">
@@ -116,10 +122,12 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Shopy-verse. All rights reserved. <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+            <p>&copy; 2024 Shopy-verse. All rights reserved. <a href="privacy.html">Privacy Policy</a> | <a
+                    href="terms.html">Terms of Service</a></p>
         </div>
     </footer>
 
     <script src="js/profile.js"></script>
 </body>
+
 </html>

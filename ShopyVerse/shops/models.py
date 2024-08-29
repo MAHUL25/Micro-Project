@@ -13,3 +13,11 @@ class ProductDetails(models.Model):
 
     def __str__(self):
         return self.product_name
+    
+class CustomUser(models.Model):
+    username = models.CharField(max_length=150, unique=True)
+    email = models.CharField(max_length=90)
+    password = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.username
