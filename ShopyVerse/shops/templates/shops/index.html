@@ -27,7 +27,12 @@
             <li><a href="{% url 'shops:contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
             <li><a href="{% url 'shops:addProduct' %}"><i class="fas fa-plus"></i> Add Product</a></li>
             <li><a href="{% url 'shops:cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
-            <li id="user-auth-link"><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i> Login</a></li>
+            {% if username != 'New User' %}
+            <li><a href="{% url 'shops:profile' %}"><i class="fas fa-user"></i> {{ username }}</a></li>
+            {% else %}
+            <li><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i>Login</a></li>
+            {% endif %}
+            <!-- <li id="user-auth-link"><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i> Login</a></li> -->
         </ul>
     </nav>
 </header>
@@ -51,7 +56,7 @@
     <h2>Featured Products</h2>
     <div class="products-container">
        <!-- Example product card -->
-        {% for i in product %}
+        {% for i in param.product %}
             <div class="product-card">
                 <img src="/media/{{i.image}}" alt="Product 4">
                 <div class="info">

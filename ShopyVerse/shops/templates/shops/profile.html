@@ -29,7 +29,11 @@
                 <li><a href="{% url 'shops:addProduct' %}"><i class="fas fa-plus"></i> Add Product</a></li>
                 <li><a href="{% url 'shops:cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
                 <!-- <li id="user-auth-link"><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i> Login</a></li> -->
-                <li><a href="#"><i class="fas fa-user"></i> {{username}}</a></li>
+                {% if username != 'New User' %}
+                <li><a href="{% url 'shops:profile' %}"><i class="fas fa-user"></i> {{ username }}</a></li>
+                {% else %}
+                <li><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i>Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
@@ -53,6 +57,7 @@
                         <h3>Personal Information</h3>
                         <p>Name: {{ username }}</p>
                         <p>Email: {{ email }}</p>
+                        <p>Address: Edit Address</p>
                         <!-- <p>Address: [User's Address]</p> -->
                         <button>Edit Information</button>
                     </div>
@@ -67,7 +72,8 @@
                     <div id="settings" class="profile-tab">
                         <h3>Settings</h3>
                         <div class="button-container"></div>
-                        <button id="logoutButton" class="logout-btn">Logout</button>
+                        <button id="logoutButton" class="logout-btn"><a href="{% url 'shops:logout' %}">Logout</a>
+                        </button>
 
 
                         <!-- <div class="change-password-section">

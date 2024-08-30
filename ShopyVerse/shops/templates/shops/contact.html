@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,23 +13,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
 </head>
+
 <body>
-   <!-- Header Section -->
-<header>
-    <div class="logo">
-        <a href="{% url 'shops:index' %}" class="logo-link">Shopy-verse</a>
-    </div>
-    <nav>
-        <ul class="nav-links">
-            <li><a href="{% url 'shops:index' %}"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="{% url 'shops:shop' %}"><i class="fas fa-store"></i> Shop</a></li>        
-            <li><a href="{% url 'shops:contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
-            <li><a href="{% url 'shops:addProduct' %}"><i class="fas fa-plus"></i> Add Product</a></li>
-            <li><a href="{% url 'shops:cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
-            <li id="user-auth-link"><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i>Login</a></li>
-        </ul>
-    </nav>
-</header>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <a href="{% url 'shops:index' %}" class="logo-link">Shopy-verse</a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'shops:index' %}"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="{% url 'shops:shop' %}"><i class="fas fa-store"></i> Shop</a></li>
+                <li><a href="{% url 'shops:contact' %}"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="{% url 'shops:addProduct' %}"><i class="fas fa-plus"></i> Add Product</a></li>
+                <li><a href="{% url 'shops:cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                {% if username != 'New User' %}
+                <li><a href="{% url 'shops:profile' %}"><i class="fas fa-user"></i> {{ username }}</a></li>
+                {% else %}
+                <li><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i>Login</a></li>
+                {% endif %}
+                <!-- <li id="user-auth-link"><a href="{% url 'shops:login' %}"><i class="fas fa-user"></i>Login</a></li> -->
+            </ul>
+        </nav>
+    </header>
 
     <!-- Contact Form Section -->
     <main>
@@ -49,31 +56,33 @@
         </section>
     </main>
 
-     <!-- Footer -->
-<footer class="footer">
-    <div class="footer-content">
-        <h4>Contact Information</h4>
-        <p>Email: info@Shopy-verse.com</p>
-        <p>Phone: +1 234 567 890</p>
-        <p>Address: 123  Street, Style City, SC 12345</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h4>Contact Information</h4>
+            <p>Email: info@Shopy-verse.com</p>
+            <p>Phone: +1 234 567 890</p>
+            <p>Address: 123 Street, Style City, SC 12345</p>
 
-        <div class="social-links">
-            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2024 Shopy-verse. All rights reserved. <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
-    </div>
-</footer>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Shopy-verse. All rights reserved. <a href="privacy.html">Privacy Policy</a> | <a
+                    href="terms.html">Terms of Service</a></p>
+        </div>
+    </footer>
 
     <script src="{% static 'shops/js/script.js' %}"></script>
 </body>
+
 </html>
