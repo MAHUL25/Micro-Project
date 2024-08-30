@@ -1,6 +1,7 @@
 from django.forms import ValidationError
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib import messages
 from .models import ProductDetails, CustomUser
 from rest_framework_simplejwt.tokens import RefreshToken
 from math import ceil
@@ -134,6 +135,32 @@ def profile(request):
     return render(request, "shops/profile.html", {'username': username, 'email': email})
 
 def addProduct(request):
+    if request.method=="POST":
+        product_id = request.POST.get('pid')
+        product_name = request.POST.get('pname')
+        display_name = request.POST.get('DisplayName')
+        category = request.POST.get('Category')
+        discounted_price = request.POST.get('DiscountedPrice')
+        actual_price = request.POST.get('ActualPrice')
+        rating = request.POST.get('Rating')
+        about_product = request.POST.get('about')
+        product_image = request.FILES.get('image')
+
+        product = ProductDetails(
+            product_id = product_id,
+            product_name = product_name,
+            display_name = display_name,
+            category = category,
+            discounted_price = int(discounted_price),
+            actual_price = int(actual_price),
+            rating = float(rating),
+            about_product = about_product,
+            image = product_image
+        )
+        product.save()
+        messages.success(request, "Product uploaded successfully")
+        return render(request, "shops/addproduct.html")
+
     return render(request, "shops/addproduct.html")
 
 def checkout(request):

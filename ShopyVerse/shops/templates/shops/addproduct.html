@@ -34,30 +34,35 @@
     <main>
         <section class="contact">
             <h2>Add Your Products</h2>
-            <form action="#" method="post" class="contact-form">
+            <form action="#" method="POST" class="contact-form">
+                {% csrf_token %}
                 <label for="pid">Product id:</label>
                 <input type="text" id="pid" name="pid" required>
                 
                 <label for="pname">Product Name:</label>
                 <input type="text" id="pname" name="pname" required>
 
+                <label for="DisplayName">Display Name:</label>
+                <input type="text" id="DisplayName" name="DisplayName" required>
+
                 <label for="Category">Category:</label>
                 <input type="text" id="Category" name="Category" required>
 
                 <label for="DiscountedPrice">Discounted Price:</label>
-                <input type="text" id="DiscountedPrice" name="DiscountedPrice" required>
+                <input type="number" id="DiscountedPrice" name="DiscountedPrice" required>
 
                 <label for="ActualPrice">Actual Price:</label>
-                <input type="text" id="ActualPrice" name="ActualPrice" required>
+                <input type="number" id="ActualPrice" name="ActualPrice" required>
 
-                <label for="ActualPrice">Rating:</label>
-                <input type="text" id="ActualPrice" name="ActualPrice" required>
+                <label for="Rating">Rating:</label>
+                <input type="text" id="Rating" name="Rating" required>
 
                 <label for="about">About Products:</label>
                 <input type="text" id="about" name="about" required>
                 
-                <label for="imageUpload">Choose an image to upload:</label>
-                <input type="file" id="imageUpload" name="image" accept="image/*" required>
+                <label for="image">Choose an image to upload:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+
                 <button type="submit" class="btn">Submit</button>
             </form>
         </section>
