@@ -7,7 +7,7 @@ from .models import ProductDetails, CustomUser
 from rest_framework_simplejwt.tokens import RefreshToken
 from math import ceil
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
@@ -79,35 +79,6 @@ def cart(request):
         username = "New User"
     return render(request, "shops/cart.html",{'username': username})
 
-class JWTAuthMiddleware(MiddlewareMixin):
-    def process_request(self, request):
-        access_token = request.COOKIES.get('access_token')
-        if access_token:
-            try:
-                # Authenticate the user using the access_token
-                jwt_auth = JWTAuthentication()
-                validated_token = jwt_auth.get_validated_token(access_token)
-                request.user = jwt_auth.get_user(validated_token)
-            except:
-                request.user = None
-
-        return None
-
-# Example of refreshing token logic
-def refresh_access_token(request):
-    refresh_token = request.COOKIES.get('refresh_token')
-    if refresh_token:
-        try:
-            refresh = RefreshToken(refresh_token)
-            access_token = str(refresh.access_token)
-            response = JsonResponse({'access_token': access_token})
-            response.set_cookie('access_token', access_token, httponly=True, samesite='Strict')
-            return response
-        except:
-            return JsonResponse({'error': 'Invalid refresh token'}, status=401)
-    else:
-        return JsonResponse({'error': 'Refresh token not provided'}, status=400)
-
 def loginPage(request):
     # login_url = reverse('login')
     if request.method == 'POST':
@@ -125,17 +96,14 @@ def loginPage(request):
 
         #user = authenticate(request, username=username, password=password)
         if check_password(password, hashedpassword):
-            # refresh = RefreshToken.for_user(user)
-            # access_token = str(refresh.access_token)
-            # refresh_token = str(refresh)
-            # response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict')
-            # access_token = request.COOKIES.get('access_token')
-            # refresh_token = request.COOKIES.get('refresh_token')
-            user = CustomUser.objects.get(username=request.data['username'])
-            token = Token.objects.create(user=user)
+            refresh = RefreshToken.for_user(user)
             response = render(request, "shops/index.html")
-            response.set_cookie('token',token, httponly=True, samesite='Strict')
-    
+            access_token = str(refresh.access_token)
+            refresh_token = str(refresh)
+            response.set_cookie('access_token', access_token, httponly=True, samesite='Strict')
+            response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict')
+            access_token = request.COOKIES.get('access_token')
+            refresh_token = request.COOKIES.get('refresh_token')
             return render(request, "shops/profile.html",  {'username': username, 'email':user.email}) 
         else:
             messages.error(request, 'Invalid username or password.')
@@ -150,11 +118,9 @@ def signupPage(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         print(username,email,password)
-
         # Validate input (basic validation)
         if not username or not email or not password:
             return render(request, 'shops/signup.html', {'error': 'All fields are required'})
-        
         try:
             # Create the user with hashed password
             user = CustomUser(
@@ -165,20 +131,14 @@ def signupPage(request):
             print(password,'hi1')
             user.save()
             print('hi2')    
-
-            # refresh = RefreshToken.for_user(user) #creates a new JWT refresh token for the specified user
-            # access_token = str(refresh.access_token)  
-            # refresh_token = str(refresh)
-            # response = render(request, "shops/login.html")
-            # response.set_cookie('access_token', access_token)
-            # response.set_cookie('refresh_token', refresh_token)
-
-            user = CustomUser.objects.get(username=request.data['username'])
-            token = Token.objects.create(user=user)
-            response = render(request, "shops/index.html")
-            response.set_cookie('token',token, httponly=True, samesite='Strict')
-
-            #login(request, user)
+            # auth_login(request, user)
+            refresh = RefreshToken.for_user(user)
+            print("hi3")
+            access_token = str(refresh.access_token)
+            refresh_token = str(refresh)
+            response = redirect('shops:index')  # Redirect after signup
+            response.set_cookie('access_token', access_token, httponly=True, samesite='Strict')
+            response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict')
             return render(request, "shops/profile.html",  {'username': username, 'email':email}) 
         except ValidationError as e:
             return render(request, 'shops/signup.html', {'error': str(e)})
