@@ -82,6 +82,10 @@ def cart(request):
 def loginPage(request):
     # login_url = reverse('login')
     if request.method == 'POST':
+        # import json
+        # data = json.loads(request.body)
+        # username = data.get('username')
+        # password = data.get('password')
         print("hello")
         username = request.POST['username']
         password = request.POST['password']
@@ -97,13 +101,19 @@ def loginPage(request):
         #user = authenticate(request, username=username, password=password)
         if check_password(password, hashedpassword):
             refresh = RefreshToken.for_user(user)
+            # print(refresh)
             response = render(request, "shops/index.html")
             access_token = str(refresh.access_token)
             refresh_token = str(refresh)
-            response.set_cookie('access_token', access_token, httponly=True, samesite='Strict')
-            response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict')
-            access_token = request.COOKIES.get('access_token')
-            refresh_token = request.COOKIES.get('refresh_token')
+            response.set_cookie('access_token', access_token, httponly=True, samesite='Strict', max_age=3600)  # 1 hour expiry
+            response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict', max_age=86400)  # 1 day expiry
+            at = request.COOKIES.get('access_token')
+            rt = request.COOKIES.get('refresh_token')
+            print("hello",rt)
+            # return JsonResponse({
+            #     'access_token': access_token,
+            #     'refresh_token': refresh_token
+            # })
             return render(request, "shops/profile.html",  {'username': username, 'email':user.email}) 
         else:
             messages.error(request, 'Invalid username or password.')

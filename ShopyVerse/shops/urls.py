@@ -1,5 +1,9 @@
 from django.urls import path
 from . import views
+from rest_framework_simplejwt.views import (
+    TokenObtainSlidingView,
+    TokenRefreshSlidingView,
+)
 
 app_name = "shops"
 urlpatterns = [
@@ -13,5 +17,7 @@ urlpatterns = [
     path("checkout/", views.checkout, name="checkout"),
     path("profile/", views.profile, name="profile"),
     path("add-product/", views.addProduct, name="addProduct"),
-    path('logout/', views.logout_view, name='logout')
+    path('logout/', views.logout_view, name='logout'),
+    path('api/token/', TokenObtainSlidingView.as_view(), name='token_obtain'),
+    path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh')
 ]
