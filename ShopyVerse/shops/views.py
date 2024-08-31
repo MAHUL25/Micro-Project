@@ -85,7 +85,7 @@ def loginPage(request):
         print("hello")
         username = request.POST['username']
         password = request.POST['password']
-        print(username,password)
+        print(username, password)
 
         try:
             user = CustomUser.objects.get(username=username)
