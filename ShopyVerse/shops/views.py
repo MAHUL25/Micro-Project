@@ -56,7 +56,7 @@ def products(request, p_id):
     username = request.user.username
     if username == "":
         username = "New User"
-    context = {'param': param, 'username': username}
+    context = {'product': product, 'username': username}
     return render(request, "shops/product.html", context)
 
 def shop(request):

@@ -18,11 +18,11 @@ class ProductDetails(models.Model):
 from django.db import models
 
 class CustomUser(models.Model):
-    #user_id = models.AutoField(primary_key=True)
+    user_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(max_length=90)  # Use EmailField for email addresses
     password = models.CharField(max_length=128)
-    #address = models.CharField(max_length=100, default="")
+    address = models.CharField(max_length=100, default="")
 
 
     def __str__(self):

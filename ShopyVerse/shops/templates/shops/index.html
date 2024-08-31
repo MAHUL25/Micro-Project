@@ -56,7 +56,7 @@
     <h2>Featured Products</h2>
     <div class="products-container">
        <!-- Example product card -->
-        {% for i in param.product %}
+        {% for i in param.product|slice:":10" %}
             <div class="product-card">
                 <img src="/media/{{i.image}}" alt="Product 4">
                 <div class="info">
