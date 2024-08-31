@@ -1,4 +1,7 @@
 from django.db import models
+import uuid
+from shortuuidfield import ShortUUIDField
+
 
 # Create your models here.
 class ProductDetails(models.Model):
@@ -18,7 +21,7 @@ class ProductDetails(models.Model):
 from django.db import models
 
 class CustomUser(models.Model):
-    user_id = models.AutoField(primary_key=True)
+    user_id = models.CharField(primary_key=True, default=uuid.uuid4(), max_length=36)
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(max_length=90)  # Use EmailField for email addresses
     password = models.CharField(max_length=128)
