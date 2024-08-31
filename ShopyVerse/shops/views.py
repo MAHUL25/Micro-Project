@@ -19,6 +19,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth import get_user_model
 from django.utils.deprecation import MiddlewareMixin
 from django.shortcuts import render
+from rest_framework.authtoken.models import Token
 
 products = ProductDetails.objects.all()
 User = get_user_model()
@@ -124,16 +125,17 @@ def loginPage(request):
 
         #user = authenticate(request, username=username, password=password)
         if check_password(password, hashedpassword):
-            refresh = RefreshToken.for_user(user)
-            access_token = str(refresh.access_token)
-            refresh_token = str(refresh)
+            # refresh = RefreshToken.for_user(user)
+            # access_token = str(refresh.access_token)
+            # refresh_token = str(refresh)
+            # response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict')
+            # access_token = request.COOKIES.get('access_token')
+            # refresh_token = request.COOKIES.get('refresh_token')
+            user = CustomUser.objects.get(username=request.data['username'])
+            token = Token.objects.create(user=user)
             response = render(request, "shops/index.html")
-            response.set_cookie('access_token', access_token, httponly=True, samesite='Strict')
-            response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict')
-            access_token = request.COOKIES.get('access_token')
-            refresh_token = request.COOKIES.get('refresh_token')
-            print(access_token)
-            print(refresh_token)
+            response.set_cookie('token',token, httponly=True, samesite='Strict')
+    
             return render(request, "shops/profile.html",  {'username': username, 'email':user.email}) 
         else:
             messages.error(request, 'Invalid username or password.')
@@ -164,13 +166,17 @@ def signupPage(request):
             user.save()
             print('hi2')    
 
-            refresh = RefreshToken.for_user(user) #creates a new JWT refresh token for the specified user
-            access_token = str(refresh.access_token)  
-            refresh_token = str(refresh)
+            # refresh = RefreshToken.for_user(user) #creates a new JWT refresh token for the specified user
+            # access_token = str(refresh.access_token)  
+            # refresh_token = str(refresh)
+            # response = render(request, "shops/login.html")
+            # response.set_cookie('access_token', access_token)
+            # response.set_cookie('refresh_token', refresh_token)
 
-            response = render(request, "shops/login.html")
-            response.set_cookie('access_token', access_token)
-            response.set_cookie('refresh_token', refresh_token)
+            user = CustomUser.objects.get(username=request.data['username'])
+            token = Token.objects.create(user=user)
+            response = render(request, "shops/index.html")
+            response.set_cookie('token',token, httponly=True, samesite='Strict')
 
             #login(request, user)
             return render(request, "shops/profile.html",  {'username': username, 'email':email}) 
@@ -185,6 +191,7 @@ def signupPage(request):
 #         return Response({'message': f'Hello, {user.username}!'})
 
 def profile(request):
+    print(request.user.username)
     return render(request, "shops/profile.html", {'username': request.user.username if request.user else "new user", 'email': request.user.email if request.user else "newuser@gmail.com"})
 
 def addProduct(request):
