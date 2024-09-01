@@ -13,13 +13,106 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    <style>/* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            position: relative;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .save-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .save-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .logout-btn {
+            color: white; /* Makes the text color white */
+            text-decoration: none; /* Removes the underline */
+            padding: 10px 20px;
+            border: none;
+            background: transparent; /* Transparent background if you want the button without a background color */
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        
+        </style>
 </head>
 
 <body>
     <!-- Header Section -->
     <header>
         <div class="logo">
-            <a href="index.html" class="logo-link">Shopy-verse</a>
+            <a href="{% url 'shops:index' %}" class="logo-link">Shopy-verse</a>
         </div>
         <nav>
             <ul class="nav-links">
@@ -48,55 +141,47 @@
                 <div class="profile-sidebar">
                     <ul>
                         <li><a href="#personal-info">Personal Information</a></li>
-                        <li><a href="#order-history">Order History</a></li>
                         <li><a href="#settings">Settings</a></li>
                     </ul>
                 </div>
                 <div class="profile-details">
                     <div id="personal-info" class="profile-tab">
                         <h3>Personal Information</h3>
-                        <p>Name: {{ username }}</p>
-                        <p>Email: {{ email }}</p>
-                        <p>Address: Edit Address</p>
+                        <p>Name: <span id="profile-name">{{ username }}</span></p>
+                        <p>Email:<span id="profile-email">{{ email }}</span> </p>
+                        <p>Address:<span id="profile-address">Edit Address</span> </p>
                         <!-- <p>Address: [User's Address]</p> -->
-                        <button>Edit Information</button>
+                        <button class="edit-btn" id="edit-info-btn">Edit Information</button>
                     </div>
-                    <div id="order-history" class="profile-tab">
-                        <h3>Order History</h3>
-                        <div class="order-item">
-                            <p>Order #12345 - Stylish Dress - $49.99</p>
-                            <p>Status: Delivered</p>
+
+
+
+                    <!-- Modal Popup for Editing Information -->
+                    <div id="editModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h3>Edit Information</h3>
+                            <form id="edit-form">
+                                <label for="edit-name">Name:</label>
+                                 <input type="text" id="edit-name" placeholder="Enter your name">
+
+                                <label for="edit-email">Email:</label>
+                                 <input type="email" id="edit-email" placeholder="Enter your email">
+            
+                                <label for="edit-address">Address:</label>
+                                <textarea id="edit-address" placeholder="Enter your address"></textarea>
+            
+                                <button type="submit" class="save-btn">Save Changes</button>
+                             </form>
                         </div>
-                        <!-- Add more orders as needed -->
                     </div>
+
                     <div id="settings" class="profile-tab">
                         <h3>Settings</h3>
                         <div class="button-container"></div>
-                        <button id="logoutButton" class="logout-btn"><a href="{% url 'shops:logout' %}">Logout</a>
+                        <button id="logoutButton">
+                            <a href="{% url 'shops:logout' %}" class="logout-btn">Logout</a>
                         </button>
-
-
-                        <!-- <div class="change-password-section">
-                            <button id="showChangePasswordForm" class="btn">Change Password</button>
-
-                            <!-- The form is hidden by default -->
-                        <div id="changePasswordFormContainer" class="form-container">
-                            <form id="changePasswordForm">
-                                <div class="form-group">
-                                    <label for="currentPassword">Current Password</label>
-                                    <input type="password" id="currentPassword" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="newPassword">New Password</label>
-                                    <input type="password" id="newPassword" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="confirmNewPassword">Confirm New Password</label>
-                                    <input type="password" id="confirmNewPassword" required>
-                                </div>
-                                <button type="submit" class="btn submit-btn">Change Password</button>
-                            </form>
-                        </div>
                     </div>
                 </div>
 
@@ -134,7 +219,56 @@
         </div>
     </footer>
 
-    <!-- <script src="js/profile.js"></script> -->
+   <script>
+    // Get elements
+const editModal = document.getElementById('editModal');
+const editInfoBtn = document.getElementById('edit-info-btn');
+const closeBtn = document.querySelector('.close');
+const saveBtn = document.querySelector('.save-btn');
+
+// Profile data elements
+const profileName = document.getElementById('profile-name');
+const profileEmail = document.getElementById('profile-email');
+const profileAddress = document.getElementById('profile-address');
+
+// Edit input fields
+const editName = document.getElementById('edit-name');
+const editEmail = document.getElementById('edit-email');
+const editAddress = document.getElementById('edit-address');
+
+// Open the modal when the "Edit Information" button is clicked
+editInfoBtn.addEventListener('click', () => {
+    editModal.style.display = 'block';
+    // Pre-fill the form with current profile information
+    editName.value = profileName.textContent;
+    editEmail.value = profileEmail.textContent;
+    editAddress.value = profileAddress.textContent;
+});
+
+// Close the modal when the close button is clicked
+closeBtn.addEventListener('click', () => {
+    editModal.style.display = 'none';
+});
+
+// Close the modal when clicking outside the modal content
+window.addEventListener('click', (event) => {
+    if (event.target === editModal) {
+        editModal.style.display = 'none';
+    }
+});
+
+// Save the changes and update the profile information
+saveBtn.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent form submission
+    // Update the profile information
+    profileName.textContent = editName.value;
+    profileEmail.textContent = editEmail.value;
+    profileAddress.textContent = editAddress.value;
+    // Close the modal
+    editModal.style.display = 'none';
+});
+
+   </script> 
 </body>
 
 </html>
