@@ -19,5 +19,6 @@ urlpatterns = [
     path("add-product/", views.addProduct, name="addProduct"),
     path('logout/', views.logout_view, name='logout'),
     path('api/token/', TokenObtainSlidingView.as_view(), name='token_obtain'),
-    path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh')
+    path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh'),
+    path('editprofile/', views.editprofile, name='editprofile'),
 ]

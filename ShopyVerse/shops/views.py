@@ -18,6 +18,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth import get_user_model
 from django.utils.deprecation import MiddlewareMixin
+from django.shortcuts import render, redirect, get_object_or_404
 from django.shortcuts import render
 from rest_framework.authtoken.models import Token
 
@@ -110,17 +111,46 @@ def loginPage(request):
             at = request.COOKIES.get('access_token')
             rt = request.COOKIES.get('refresh_token')
             print("hello",rt)
+            if user.address == "":
+                address = "Edit Address"
+            else:
+                address = user.address
             # return JsonResponse({
             #     'access_token': access_token,
             #     'refresh_token': refresh_token
             # })
-            return render(request, "shops/profile.html",  {'username': username, 'email':user.email}) 
+            return render(request, "shops/profile.html",  {'username': username, 'email':user.email, 'address': address}) 
         else:
             messages.error(request, 'Invalid username or password.')
             return render(request, "shops/login.html") 
         
     # login_url = reverse('login')
     return render(request, "shops/login.html")
+
+def editprofile(request):
+    if request.method == 'POST':
+        print("hello")
+        # Example of how to handle the form data
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        print(username,email,address)
+        # Assuming the user is logged in and we want to update their profile
+        user = CustomUser.objects.get(username=username)        
+        print(user)
+
+        # Optionally check if the username in the form is the same as the logged-in user
+        user.email = email
+        user.address = address
+        user.save()
+        if user.address == "":
+            address = "Edit Address"
+        else:
+            address = user.address
+        print(address)
+
+    # Handle GET request or display the form
+    return render(request, "shops/profile.html",{'username': username, 'email':email, 'address':address})
 
 def signupPage(request):
     if request.method == 'POST':
@@ -149,7 +179,7 @@ def signupPage(request):
             response = redirect('shops:index')  # Redirect after signup
             response.set_cookie('access_token', access_token, httponly=True, samesite='Strict')
             response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict')
-            return render(request, "shops/profile.html",  {'username': username, 'email':email}) 
+            return render(request, "shops/profile.html",  {'username': username, 'email':email, 'address': 'Edit Address'}) 
         except ValidationError as e:
             return render(request, 'shops/signup.html', {'error': str(e)})
     return render(request, "shops/signup.html")
@@ -161,8 +191,14 @@ def signupPage(request):
 #         return Response({'message': f'Hello, {user.username}!'})
 
 def profile(request):
-    print(request.user.username)
-    return render(request, "shops/profile.html", {'username': request.user.username if request.user else "new user", 'email': request.user.email if request.user else "newuser@gmail.com"})
+    print("hello")
+    user = CustomUser.objects.get(username=request.user.username)
+    if user.address == "":
+        address = "Edit Address"
+    else:
+        address = user.address
+    print(address)
+    return render(request, "shops/profile.html", {'username': request.user.username if request.user else "new user", 'email': request.user.email if request.user else "newuser@gmail.com", 'address':address})
 
 def addProduct(request):
     if request.method=="POST":

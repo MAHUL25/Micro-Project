@@ -149,7 +149,7 @@
                         <h3>Personal Information</h3>
                         <p>Name: <span id="profile-name">{{ username }}</span></p>
                         <p>Email:<span id="profile-email">{{ email }}</span> </p>
-                        <p>Address:<span id="profile-address">Edit Address</span> </p>
+                        <p>Address:<span id="profile-address">{{ address }}</span> </p>
                         <!-- <p>Address: [User's Address]</p> -->
                         <button class="edit-btn" id="edit-info-btn">Edit Information</button>
                     </div>
@@ -161,21 +161,21 @@
                         <div class="modal-content">
                             <span class="close">&times;</span>
                             <h3>Edit Information</h3>
-                            <form id="edit-form">
+                            <form id="edit-form" method="POST" action="{% url 'shops:editprofile' %}">
+                                {% csrf_token %}
                                 <label for="edit-name">Name:</label>
-                                 <input type="text" id="edit-name" placeholder="Enter your name">
-
+                                <input type="text" id="edit-name" name="username" placeholder="Enter your name">
+                                
                                 <label for="edit-email">Email:</label>
-                                 <input type="email" id="edit-email" placeholder="Enter your email">
-            
+                                <input type="email" id="edit-email" name="email" placeholder="Enter your email">
+                                
                                 <label for="edit-address">Address:</label>
-                                <textarea id="edit-address" placeholder="Enter your address"></textarea>
-            
-                                <button type="submit" class="save-btn">Save Changes</button>
-                             </form>
+                                <textarea id="edit-address" name="address" placeholder="Enter your address"></textarea>
+                                
+                                <button type="button" id="save-btn" class="save-btn">Save changes</button>
+                            </form>
                         </div>
                     </div>
-
                     <div id="settings" class="profile-tab">
                         <h3>Settings</h3>
                         <div class="button-container"></div>
@@ -184,9 +184,6 @@
                         </button>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
         </div>
@@ -220,11 +217,11 @@
     </footer>
 
    <script>
-    // Get elements
+// Get elements
 const editModal = document.getElementById('editModal');
 const editInfoBtn = document.getElementById('edit-info-btn');
 const closeBtn = document.querySelector('.close');
-const saveBtn = document.querySelector('.save-btn');
+const saveBtn = document.getElementById('save-btn'); // Change to id for clarity
 
 // Profile data elements
 const profileName = document.getElementById('profile-name');
@@ -257,17 +254,12 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// Save the changes and update the profile information
-saveBtn.addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent form submission
-    // Update the profile information
-    profileName.textContent = editName.value;
-    profileEmail.textContent = editEmail.value;
-    profileAddress.textContent = editAddress.value;
-    // Close the modal
-    editModal.style.display = 'none';
+// Save the changes and submit the form
+saveBtn.addEventListener('click', () => {
+    // No need to call event.preventDefault() here
+    // The form submission will be handled by the default form behavior
+    document.getElementById('edit-form').submit(); // Programmatically submit the form
 });
-
    </script> 
 </body>
 
