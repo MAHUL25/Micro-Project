@@ -18,68 +18,77 @@
             background-color: #f4f4f4;
             border-radius: 8px;
         }
-
+        
         .reviews-section h2 {
             text-align: center;
             font-size: 28px;
             margin-bottom: 20px;
             color: #333;
         }
-
+        
         .reviews-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            overflow-x: auto;
             gap: 20px;
+            padding: 10px;
+            scroll-snap-type: x mandatory;
         }
-
+        
         .review-block {
+            min-width: 250px;
+            flex: 0 0 auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            scroll-snap-align: start;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
         .review-block:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-
+        
         .review-header {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
-
+        
         .review-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             margin-right: 10px;
         }
-
+        
         .review-username {
             font-size: 18px;
             font-weight: bold;
             color: #333;
         }
-
+        
         .review-date {
             margin-left: auto;
             font-size: 12px;
             color: #777;
         }
-
-        .review-text {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 10px;
-        }
-
+        
         .review-rating {
             color: #f39c12;
             font-size: 18px;
+            display: flex;
+            align-items: center;
         }
+        
+        .rating-number {
+            font-size: 16px;
+            color: #555;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+        
     </style>
 </head>
 
@@ -127,58 +136,33 @@
                         <!-- Example Review Block -->
                         <div class="review-block">
                             <div class="review-header">
-
+                                
                                 <h4 class="review-username">John Doe</h4>
                                 <span class="review-date">August 25, 2024</span>
                             </div>
-                            <p class="review-text">Amazing product! The quality is outstanding, and it was delivered on
-                                time. Highly recommend!</p>
                             <div class="review-rating">
-                                ★★★★☆
+                                ★★★★☆ <span class="rating-number">4.0</span>
                             </div>
                         </div>
-                        <!-- Add more review blocks as needed -->
+                        <!-- Add multiple review blocks as needed -->
                         <div class="review-block">
                             <div class="review-header">
 
-                                <h4 class="review-username">John Doe</h4>
-                                <span class="review-date">August 25, 2024</span>
+                                <h4 class="review-username">Jane Smith</h4>
+                                <span class="review-date">July 18, 2024</span>
                             </div>
-                            <p class="review-text">Amazing product! The quality is outstanding, and it was delivered on
-                                time. Highly recommend!</p>
                             <div class="review-rating">
-                                ★★★★☆
+                                ★★★☆☆ <span class="rating-number">3.0</span>
                             </div>
                         </div>
-                        <div class="review-block">
-                            <div class="review-header">
-
-                                <h4 class="review-username">John Doe</h4>
-                                <span class="review-date">August 25, 2024</span>
-                            </div>
-                            <p class="review-text">Amazing product! The quality is outstanding, and it was delivered on
-                                time. Highly recommend!</p>
-                            <div class="review-rating">
-                                ★★★★☆
-                            </div>
-                        </div>
-                        <div class="review-block">
-                            <div class="review-header">
-
-                                <h4 class="review-username">John Doe</h4>
-                                <span class="review-date">August 25, 2024</span>
-                            </div>
-                            <p class="review-text">Amazing product! The quality is outstanding, and it was delivered on
-                                time. Highly recommend!</p>
-                            <div class="review-rating">
-                                ★★★★☆
-                            </div>
-                        </div>
+                        <!-- Repeat review blocks for more reviews -->
                     </div>
                 </section>
+
                 <div class="product-actions">
                     <button class="add-to-cart">Add to Cart</button>
                     <button class="buy-now">Buy Now</button>
+                    <button class="buy-now">Delete</button>
                 </div>
             </div>
         </section>
