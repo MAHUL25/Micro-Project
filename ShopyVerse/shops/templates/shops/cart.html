@@ -47,15 +47,15 @@
             <div class="cart-summary">
                 <div class="summary-item">
                     <h3>Subtotal:</h3>
-                    <p class="subtotal">$0.00</p>
+                    <p class="subtotal">₹{{total}}</p>
                 </div>
                 <div class="summary-item">
                     <h3>Tax:</h3>
-                    <p class="tax">$0.00</p>
+                    <p class="tax">₹0.00</p>
                 </div>
                 <div class="summary-item">
                     <h3>Total:</h3>
-                    <p class="total">$0.00</p>
+                    <p class="total">₹{{total}}</p>
                 </div>
                 <button id="checkout-button" class="checkout-btn"><a href="{% url 'shops:checkout' %}" style="color: white;text-decoration: none;">Proceed to Checkout</a></button>
             </div>
@@ -87,6 +87,6 @@
         </div>
     </footer>
 
-    <script src="{% static 'shops/js/cart.js' %}"></script>
+    <!-- <script src="{% static 'shops/js/cart.js' %}"></script> -->
 </body>
 </html>

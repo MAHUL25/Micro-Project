@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/token/', TokenObtainSlidingView.as_view(), name='token_obtain'),
     path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh'),
     path('editprofile/', views.editprofile, name='editprofile'),
+    path('product/<str:p_id>/functions', views.product_function, name='product_function'),
 ]

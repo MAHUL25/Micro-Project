@@ -160,9 +160,12 @@
                 </section>
 
                 <div class="product-actions">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                    <button class="buy-now">Delete</button>
+                    <form action="{% url 'shops:product_function' product.product_id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="add-to-cart" name="action" value="add_to_cart">Add to Cart</button>
+                        <button class="buy-now" name="action" value="buy">Buy Now</button>
+                        <button class="buy-now" name="action" value="delete">Delete</button>
+                    </form>
                 </div>
             </div>
         </section>

@@ -22,24 +22,24 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.shortcuts import render
 from rest_framework.authtoken.models import Token
 
-products = ProductDetails.objects.all()
+# products = ProductDetails.objects.all()
 User = get_user_model()
-# n = len(products)
-n = 10
-nSlides = n//4 + ceil((n/4)-(n//4))
-param = {
-    'no_of_slides': nSlides,
-    'product': products,
-    'range': range(1, nSlides)
-}
+# param = {
+#     'no_of_slides': nSlides,
+#     'product': products,
+#     'range': range(1, nSlides)
+# }
+
+total = 0
 
 # Create your views here.
 def index(request):
+    products = ProductDetails.objects.all()
     username = request.user.username
     print(username, "hello")
     if username == "":
         username = "New User"
-    context = {'param': param, 'username': username}
+    context = {'products': products, 'username': username}
     return render(request, "shops/index.html", context)
 
 def logout_view(request):
@@ -62,10 +62,11 @@ def products(request, p_id):
     return render(request, "shops/product.html", context)
 
 def shop(request):
+    products = ProductDetails.objects.all()
     username = request.user.username
     if username == "":
         username = "New User"
-    context = {'param': param, 'username': username}
+    context = {'products': products, 'username': username}
     return render(request, "shops/shop.html", context)
 
 def contacts(request):
@@ -75,10 +76,11 @@ def contacts(request):
     return render(request, "shops/contact.html",{'username': username})
 
 def cart(request):
+    global total
     username = request.user.username
-    if username == "":
+    if username == " ":
         username = "New User"
-    return render(request, "shops/cart.html",{'username': username})
+    return render(request, "shops/cart.html",{'total': total, 'username': username})
 
 def loginPage(request):
     # login_url = reverse('login')
@@ -235,3 +237,26 @@ def addProduct(request):
 
 def checkout(request):
     return render(request, "shops/checkout.html")
+
+def product_function(request, p_id):
+    if request.method == "POST":
+        action = request.POST.get('action')
+        
+        if action == 'add_to_cart':
+            product = ProductDetails.objects.get(pk=p_id)
+            if request.method == 'POST':
+                global total
+                total += product.discounted_price
+                return render(request, "shops/cart.html", {
+                    'total': total,
+                    'username': request.user.username if request.user else "new user"
+                })
+        elif action == 'buy_now':
+            # Handle buying now
+            pass
+        elif action == 'delete':
+            product = ProductDetails.objects.get(pk=p_id)
+            if request.method == 'POST':
+                product.delete()
+                return render(request, "shops/shop.html")  # Redirect to a success page or another view
+    return render(request, "shops/product.html")

@@ -11,7 +11,7 @@ class ProductDetails(models.Model):
     actual_price = models.IntegerField(default=0)
     rating = models.FloatField(max_length=5, default=0)
     about_product = models.CharField(max_length=250, default="")
-    image = models.ImageField(upload_to='shops/images', default="")
+    image = models.ImageField(upload_to='shops/images')
 
     def __str__(self):
         return self.product_name
