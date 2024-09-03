@@ -35,7 +35,7 @@ total = 0
 # Create your views here.
 def index(request):
     products = ProductDetails.objects.all()
-    username = request.user.username
+    username = request.session.get('username')
     print(username, "hello")
     if username == "":
         username = "New User"
@@ -43,19 +43,20 @@ def index(request):
     return render(request, "shops/index.html", context)
 
 def logout_view(request):
-    logout(request)  # This will log out the user and clear the session
-    print("logout")
-    response = redirect('shops:index')  # Redirect to a specific page after logout
-    # Optionally, clear any JWT tokens if you're using JWT for session management
-    response.delete_cookie('access_token')
-    response.delete_cookie('refresh_token')
-    return response
+    del request.session['access_token']
+    del request.session['refresh_token']
+    del request.session['username']
+    username = request.session.get('username')
+    if username == None:
+        username = "New User"
+    context = {'products': products, 'username': username}
+    return render(request, "shops/index.html", context)
 
 def products(request, p_id):
     print(p_id)
     product = ProductDetails.objects.get(pk=p_id)
     print(product)
-    username = request.user.username
+    username = request.session.get('username')
     if username == "":
         username = "New User"
     context = {'product': product, 'username': username}
@@ -63,21 +64,21 @@ def products(request, p_id):
 
 def shop(request):
     products = ProductDetails.objects.all()
-    username = request.user.username
+    username = request.session.get('username')
     if username == "":
         username = "New User"
     context = {'products': products, 'username': username}
     return render(request, "shops/shop.html", context)
 
 def contacts(request):
-    username = request.user.username
+    username = request.session.get('username')
     if username == "":
         username = "New User"
     return render(request, "shops/contact.html",{'username': username})
 
 def cart(request):
     global total
-    username = request.user.username
+    username = request.session.get('username')
     if username == " ":
         username = "New User"
     return render(request, "shops/cart.html",{'total': total, 'username': username})
@@ -108,11 +109,14 @@ def loginPage(request):
             response = render(request, "shops/index.html")
             access_token = str(refresh.access_token)
             refresh_token = str(refresh)
-            response.set_cookie('access_token', access_token, httponly=True, samesite='Strict', max_age=3600)  # 1 hour expiry
-            response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict', max_age=86400)  # 1 day expiry
-            at = request.COOKIES.get('access_token')
-            rt = request.COOKIES.get('refresh_token')
-            print("hello",rt)
+            # response.set_cookie('access_token', access_token, httponly=True, samesite='Strict', max_age=3600)  # 1 hour expiry
+            # response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict', max_age=86400)  # 1 day expiry
+            # at = request.COOKIES.get('access_token')
+            # rt = request.COOKIES.get('refresh_token')
+            # print("hello",rt)
+            request.session['access_token'] = access_token
+            request.session['refresh_token'] = refresh_token
+            request.session['username'] = username
             if user.address == "":
                 address = "Edit Address"
             else:
@@ -178,9 +182,12 @@ def signupPage(request):
             print("hi3")
             access_token = str(refresh.access_token)
             refresh_token = str(refresh)
-            response = redirect('shops:index')  # Redirect after signup
-            response.set_cookie('access_token', access_token, httponly=True, samesite='Strict')
-            response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict')
+            request.session['access_token'] = access_token
+            request.session['refresh_token'] = refresh_token
+            request.session['username'] = username
+            # response = redirect('shops:index')  # Redirect after signup
+            # response.set_cookie('access_token', access_token, httponly=True, samesite='Strict')
+            # response.set_cookie('refresh_token', refresh_token, httponly=True, samesite='Strict')
             return render(request, "shops/profile.html",  {'username': username, 'email':email, 'address': 'Edit Address'}) 
         except ValidationError as e:
             return render(request, 'shops/signup.html', {'error': str(e)})
@@ -194,13 +201,13 @@ def signupPage(request):
 
 def profile(request):
     print("hello")
-    user = CustomUser.objects.get(username=request.user.username)
+    user = CustomUser.objects.get(username=request.session.get('username'))
     if user.address == "":
         address = "Edit Address"
     else:
         address = user.address
     print(address)
-    return render(request, "shops/profile.html", {'username': request.user.username if request.user else "new user", 'email': request.user.email if request.user else "newuser@gmail.com", 'address':address})
+    return render(request, "shops/profile.html", {'username': user.username if user else "new user", 'email': user.email if user else "newuser@gmail.com", 'address':address})
 
 def addProduct(request):
     if request.method=="POST":
@@ -229,7 +236,7 @@ def addProduct(request):
         messages.success(request, "Product uploaded successfully")
         return render(request, "shops/addproduct.html")
     
-    username = request.user.username
+    username = username = request.session.get('username')
     if username == "":
         username = "New User"
 
